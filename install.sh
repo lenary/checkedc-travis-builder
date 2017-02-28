@@ -2,17 +2,25 @@
 
 set -e
 
-CMAKE_REQ_VERS=3.7.2
-CMAKE_DIR=cmake-3.7.2-Linux-x86_64
-CMAKE_URL="https://cmake.org/files/v3.7/cmake-3.7.2-Linux-x86_64.tar.gz"
-if cmake --version | grep -q $CMAKE_REQ_VERS; then
-  echo "Using Installed CMake"
-  CMAKE=`which cmake`
-elif [ ! -d cmake ]; then
+
+# CMAKE_REQ_VERS=3.7.2
+# if cmake --version | grep $CMAKE_REQ_VERS > /dev/null; then
+#   echo "Using Installed CMake"
+#   CMAKE=`which cmake`
+if [ ! -d cmake ]; then
+
+  if [ $TRAVIS_OS_NAME = 'linux' ]; then
+    CMAKE_DIR=cmake-3.7.2-Linux-x86_64
+    CMAKE_URL="https://cmake.org/files/v3.7/cmake-3.7.2-Linux-x86_64.tar.gz"
+  elif [ $TRAVIS_OS_NAME == "osx" ]; then
+    echo "TODO: CMake Install Mac"
+    exit 1
+  fi
+
   curl -o cmake.tar.gz  $CMAKE_URL
   tar -xzf cmake.tar.gz
   mv $CMAKE_DIR cmake
-  (cd $CMAKE_DIR;
+  (cd cmake;
   ./bootstrap;
   make)
 fi
@@ -23,7 +31,7 @@ if [ -x cmake/bin/cmake ]; then
   echo "Using Own CMake: ${CMAKE}"
 fi
 
-cmake --version
+$CMAKE --version
 
 CLONE_DEPTH=50
 
