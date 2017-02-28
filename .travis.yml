@@ -9,7 +9,7 @@ script:
 # Which OSs to build on
 os:
 - linux
-- osx
+# - osx
 sudo: required
 dist: trusty
 
@@ -18,3 +18,4 @@ cache:
   directories:
   - llvm
   - llvm.build
+  - cmake

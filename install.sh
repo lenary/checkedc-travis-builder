@@ -2,15 +2,17 @@
 
 set -e
 
-CMAKE_VERS=3.7.2
+CMAKE_REQ_VERS=3.7.2
+CMAKE_DIR=cmake-3.7.2-Linux-x86_64
 CMAKE_URL="https://cmake.org/files/v3.7/cmake-3.7.2-Linux-x86_64.tar.gz"
-if cmake --version | grep -q $CMAKE_VERS; then
+if cmake --version | grep -q $CMAKE_REQ_VERS; then
   echo "Using Installed CMake"
   CMAKE=`which cmake`
 elif [ ! -d cmake ]; then
   curl -o cmake.tar.gz  $CMAKE_URL
   tar -xzf cmake.tar.gz
-  (cd cmake;
+  mv $CMAKE_DIR cmake
+  (cd $CMAKE_DIR;
   ./bootstrap;
   make)
 fi
