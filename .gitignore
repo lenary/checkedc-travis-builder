@@ -1,3 +1,5 @@
 llvm
 llvm.build
 debug.log
+cmake
+cmake.tar.gz
