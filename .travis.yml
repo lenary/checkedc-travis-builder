@@ -1,18 +1,19 @@
 ---
 compiler:
 - clang
-- gcc
+# - gcc
 language: c
-install: ./install.sh
+install:
+- ./install.sh
 script:
 - "make -j$(nproc) -C llvm.build check-checkedc"
 - "make -j$(nproc) -C llvm.build check-clang"
+- "./llvm.lnt.ve/bin/lnt runtest nt --sandbox ./llvm.lnt.sandbox --cc ./llvm.build/bin/clang --test-suite ./checkedc-llvm-test-suite --cflags -fcheckedc-extension"
 
 # Which OSs to build on
 os:
 - linux
 - osx
-sudo: required
 dist: trusty
 
 # What directories to cache
@@ -20,5 +21,24 @@ cache:
 - ccache
 - directories:
   - llvm
+  - lnt
+  - checkedc-llvm-test-suite
   - llvm.build
+  - llvm.lnt.sandbox
+  - llvm.lnt.ve
   - cmake
+
+# For LNT
+python: "2.7"
+addons:
+  apt:
+    packages:
+    - tcl
+    - bison
+    - zlib1g-dev
+
+# We really don't care about building with gcc on osx
+matrix:
+  exclude:
+  - compiler: gcc
+    os: osx
