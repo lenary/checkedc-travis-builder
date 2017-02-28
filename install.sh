@@ -24,9 +24,10 @@ if [ ! -d cmake/bin ]; then
   mv $CMAKE_DIR cmake
 fi
 
-CMAKE="$(pwd)/cmake/bin/cmake"
+export CMAKE_OUR_BIN="$(pwd)/cmake/bin/cmake"
 export PATH="$(pwd)/cmake/bin:$PATH"
-echo "Using Own CMake: ${CMAKE}"
+echo "Using Own CMake: ${CMAKE_OUR_BIN}"
+$CMAKE_OUR_BIN --version
 
 if [ $TRAVIS_OS_NAME = 'linux' ]; then
   # Handled by travis apt addon
@@ -79,7 +80,7 @@ mkdir -p llvm.build
 
 # Run CMake for llvm.build (cached)
 (cd llvm.build;
-$CMAKE -G "Unix Makefiles" -DLLVM_TARGETS_TO_BUILD="X86" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=On ../llvm)
+$CMAKE_OUR_BIN -G "Unix Makefiles" -DLLVM_TARGETS_TO_BUILD="X86" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=On ../llvm)
 
 # Virtualenv for LNT (cahced)
 virtualenv ./llvm.lnt.ve

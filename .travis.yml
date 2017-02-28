@@ -26,7 +26,6 @@ cache:
   - llvm.build
   - llvm.lnt.sandbox
   - llvm.lnt.ve
-  - cmake
 
 # For LNT
 python: "2.7"
