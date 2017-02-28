@@ -2,6 +2,22 @@
 
 set -e
 
+CMAKE_VERS=3.7.2
+CMAKE_URL="https://cmake.org/files/v3.7/cmake-3.7.2-Linux-x86_64.tar.gz"
+if cmake --version | grep -q $CMAKE_VERS; then
+  echo "Using Installed CMake"
+else if [ ! -d cmake ]; then
+  curl -o cmake.tar.gz  $CMAKE_URL
+  tar -xzf cmake.tar.gz
+  (cd cmake;
+  ./bootstrap;
+  make)
+fi
+
+if [ -d cmake]; then
+  export PATH="$(pwd)/cmake/bin:$PATH"
+fi
+
 cmake --version
 
 # Check out LLVM
