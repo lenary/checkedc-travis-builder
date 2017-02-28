@@ -5,8 +5,8 @@ compiler:
 language: c
 install: ./install.sh
 script:
-- make -j3 -C llvm.build check-checkedc
-- make -j3 -C llvm.build check-clang
+- "make -j$(nproc) -C llvm.build check-checkedc"
+- "make -j$(nproc) -C llvm.build check-clang"
 
 # Which OSs to build on
 os:
