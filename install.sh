@@ -2,10 +2,10 @@
 
 set -e
 
-if [ $TRAVIS_OS_NAME = 'linux' ]; then
+if [ "${TRAVIS_OS_NAME}" = "linux" ]; then
   CMAKE_DIR=cmake-3.7.2-Linux-x86_64
   CMAKE_URL="https://cmake.org/files/v3.7/cmake-3.7.2-Linux-x86_64.tar.gz"
-elif [ $TRAVIS_OS_NAME == "osx" ]; then
+elif [ "${TRAVIS_OS_NAME}" = "osx" ]; then
   CMAKE_DIR=cmake-3.7.2-Darwin-x86_64
   CMAKE_URL="https://cmake.org/files/v3.7/cmake-3.7.2-Darwin-x86_64.tar.gz"
 else
