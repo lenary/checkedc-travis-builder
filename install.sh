@@ -20,9 +20,6 @@ if [ ! -d cmake ]; then
   curl -o cmake.tar.gz  $CMAKE_URL
   tar -xzf cmake.tar.gz
   mv $CMAKE_DIR cmake
-  (cd cmake;
-  ./bootstrap;
-  make)
 fi
 
 if [ -x cmake/bin/cmake ]; then
