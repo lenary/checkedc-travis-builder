@@ -6,7 +6,7 @@ CMAKE_VERS=3.7.2
 CMAKE_URL="https://cmake.org/files/v3.7/cmake-3.7.2-Linux-x86_64.tar.gz"
 if cmake --version | grep -q $CMAKE_VERS; then
   echo "Using Installed CMake"
-else if [ ! -d cmake ]; then
+elif [ ! -d cmake ]; then
   curl -o cmake.tar.gz  $CMAKE_URL
   tar -xzf cmake.tar.gz
   (cd cmake;
@@ -14,7 +14,8 @@ else if [ ! -d cmake ]; then
   make)
 fi
 
-if [ -d cmake]; then
+if [ -x cmake/bin/cmake ]; then
+  CMAKE="$(pwd)/cmake/bin/cmake"
   export PATH="$(pwd)/cmake/bin:$PATH"
 fi
 
@@ -49,6 +50,6 @@ mkdir -p llvm.build
 cd llvm.build
 
 # Run CMake
-cmake -G "Unix Makefiles" -DLLVM_TARGETS_TO_BUILD="X86" ../llvm
+$CMAKE -G "Unix Makefiles" -DLLVM_TARGETS_TO_BUILD="X86" ../llvm
 
 # TODO: LNT Test Suite
