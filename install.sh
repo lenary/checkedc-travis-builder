@@ -36,6 +36,7 @@ $CMAKE --version
 
 if [ $TRAVIS_OS_NAME = 'linux' ]; then
   # Handled by travis apt addon
+  true
 elif [ $TRAVIS_OS_NAME == "osx" ]; then
   brew install bison
 fi
