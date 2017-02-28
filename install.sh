@@ -78,8 +78,7 @@ mkdir -p llvm.build
 
 # Run CMake for llvm.build, and first make pass (to keep first build logs with install) (cached)
 (cd llvm.build;
-$CMAKE_OUR_BIN -G "Unix Makefiles" -DLLVM_TARGETS_TO_BUILD="X86" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=On ../llvm;
-make -j$(nproc))
+$CMAKE_OUR_BIN -G "Unix Makefiles" -DLLVM_TARGETS_TO_BUILD="X86" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=On ../llvm)
 
 # Virtualenv for LNT (cahced)
 virtualenv ./llvm.lnt.ve
