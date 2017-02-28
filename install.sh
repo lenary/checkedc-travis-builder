@@ -19,20 +19,14 @@ fi
 #   echo "Using Installed CMake"
 #   CMAKE=`which cmake`
 if [ ! -d cmake/bin ]; then
-
-
   curl -o cmake.tar.gz  $CMAKE_URL
   tar -xzf cmake.tar.gz
   mv $CMAKE_DIR cmake
 fi
 
-if [ -x cmake/bin/cmake ]; then
-  CMAKE="$(pwd)/cmake/bin/cmake"
-  export PATH="$(pwd)/cmake/bin:$PATH"
-  echo "Using Own CMake: ${CMAKE}"
-fi
-
-$CMAKE --version
+CMAKE="$(pwd)/cmake/bin/cmake"
+export PATH="$(pwd)/cmake/bin:$PATH"
+echo "Using Own CMake: ${CMAKE}"
 
 if [ $TRAVIS_OS_NAME = 'linux' ]; then
   # Handled by travis apt addon
