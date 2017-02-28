@@ -13,21 +13,19 @@ else
   exit 1
 fi
 
-
-# CMAKE_REQ_VERS=3.7.2
-# if cmake --version | grep $CMAKE_REQ_VERS > /dev/null; then
-#   echo "Using Installed CMake"
-#   CMAKE=`which cmake`
-if [ ! -d cmake/bin ]; then
+CMAKE_REQ_VERS=3.7.2
+if cmake --version | grep $CMAKE_REQ_VERS > /dev/null; then
+  CMAKE_OUR_BIN=`which cmake`
+  echo "Using System CMake: ${CMAKE_OUR_BIN}"
+elif [ ! -x cmake/bin/cmake ]; then
   curl -o cmake.tar.gz  $CMAKE_URL
   tar -xzf cmake.tar.gz
   mv $CMAKE_DIR cmake
+  export CMAKE_OUR_BIN="$(pwd)/cmake/bin/cmake"
+  export PATH="$(pwd)/cmake/bin:$PATH"
+  echo "Using Own CMake: ${CMAKE_OUR_BIN}"
+  $CMAKE_OUR_BIN --version | grep -q $CMAKE_REQ_VERS
 fi
-
-export CMAKE_OUR_BIN="$(pwd)/cmake/bin/cmake"
-export PATH="$(pwd)/cmake/bin:$PATH"
-echo "Using Own CMake: ${CMAKE_OUR_BIN}"
-$CMAKE_OUR_BIN --version
 
 if [ $TRAVIS_OS_NAME = 'linux' ]; then
   # Handled by travis apt addon
@@ -78,9 +76,10 @@ fi
 # Make Build Dir
 mkdir -p llvm.build
 
-# Run CMake for llvm.build (cached)
+# Run CMake for llvm.build, and first make pass (to keep first build logs with install) (cached)
 (cd llvm.build;
-$CMAKE_OUR_BIN -G "Unix Makefiles" -DLLVM_TARGETS_TO_BUILD="X86" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=On ../llvm)
+$CMAKE_OUR_BIN -G "Unix Makefiles" -DLLVM_TARGETS_TO_BUILD="X86" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=On ../llvm;
+make -j$(nproc))
 
 # Virtualenv for LNT (cahced)
 virtualenv ./llvm.lnt.ve

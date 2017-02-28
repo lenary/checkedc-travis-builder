@@ -6,8 +6,7 @@ language: c
 install:
 - ./install.sh
 script:
-- "make -j$(nproc) -C llvm.build check-checkedc"
-- "make -j$(nproc) -C llvm.build check-clang"
+- "make -j$(nproc) --no-print-directory -C llvm.build --keep-going check-checkedc check-clang"
 - "./llvm.lnt.ve/bin/lnt runtest nt --sandbox ./llvm.lnt.sandbox --cc ./llvm.build/bin/clang --test-suite ./checkedc-llvm-test-suite --cflags -fcheckedc-extension"
 
 # Which OSs to build on
