@@ -1,0 +1,20 @@
+---
+compiler: clang
+language: c
+install: ./install.sh
+script:
+- make -j3 -C llvm.build check-checkedc
+- make -j3 -C llvm.build check-clang
+
+# Which OSs to build on
+os:
+- linux
+- osx
+sudo: required
+dist: trusty
+
+# What directories to cache
+cache:
+  directories:
+  - llvm
+  - llvm.build
