@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+
+set -ue
+set -o pipefail
+
+# If we're on travis, set BUILD_OS_NAME to be cross-build-system
+if [ -n "${TRAVIS_OS_NAME}" ]; then
+  export BUILD_OS_NAME=$TRAVIS_OS_NAME
+fi
+
+CLONE_DEPTH=50
+
+function clone_or_update {
+  local dir=$1
+  local url=$2
+  local branch=${3:-master}
+
+  if [ ! -d ${dir}/.git ]; then
+    git clone --depth ${CLONE_DEPTH} ${url} ${dir}
+  else
+    (cd ${dir}; git fetch --update-shallow origin)
+  fi
+
+  (cd ${dir}; git checkout $branch; git pull origin $branch)
+}
+
+# TODO: Choose branches intelligently
+
+# Check out LLVM
+clone_or_update llvm https://github.com/Microsoft/checkedc-llvm master
+
+# Check out Clang
+clone_or_update llvm/tools/clang https://github.com/Microsoft/checkedc-clang master
+
+# Check out Checked C Tests
+clone_or_update llvm/projects/checkedc-wrapper/checkedc https://github.com/Microsoft/checkedc master
+
+# Check out LNT
+clone_or_update lnt https://github.com/llvm-mirror/lnt master
+
+# Check out Test Suite
+clone_or_update llvm-test-suite https://github.com/Microsoft/checkedc-llvm-test-suite master
+
+# Make Build Dir
+mkdir -p llvm.build
+
+# Run CMake for llvm.build, and first make pass (to keep first build logs with install) (cached)
+(cd llvm.build;
+$CMAKE_OUR_BIN -G "Unix Makefiles" -DLLVM_TARGETS_TO_BUILD="X86" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=On ../llvm)
+
+# Install lnt
+(cd lnt;
+$LNT_VE_DIR/bin/python setup.py install)

@@ -1,5 +1,13 @@
+# Source Directories
 llvm
+lnt
+llvm-test-suite
+
+# Build Directories
 llvm.build
-debug.log
+llvm.lnt.sandbox
+
+# Utilities Install Dirs
 cmake
 cmake.tar.gz
+llvm.lnt.ve
