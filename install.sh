@@ -6,6 +6,7 @@ CMAKE_VERS=3.7.2
 CMAKE_URL="https://cmake.org/files/v3.7/cmake-3.7.2-Linux-x86_64.tar.gz"
 if cmake --version | grep -q $CMAKE_VERS; then
   echo "Using Installed CMake"
+  CMAKE=`which cmake`
 elif [ ! -d cmake ]; then
   curl -o cmake.tar.gz  $CMAKE_URL
   tar -xzf cmake.tar.gz
@@ -17,6 +18,7 @@ fi
 if [ -x cmake/bin/cmake ]; then
   CMAKE="$(pwd)/cmake/bin/cmake"
   export PATH="$(pwd)/cmake/bin:$PATH"
+  echo "Using Own CMake: ${CMAKE}"
 fi
 
 cmake --version
@@ -34,7 +36,7 @@ fi;
 if [ ! -d llvm/tools/clang/.git ]; then
   (cd llvm/tools; git clone --depth ${CLONE_DEPTH} https://github.com/Microsoft/checkedc-clang clang)
 else
-  (cd llvm/tools/git; git pull)
+  (cd llvm/tools/clang; git pull)
 fi
 
 # Check out Checked C Tests
@@ -45,7 +47,6 @@ else
 fi
 
 # TODO: Choose Branches based on ENV Variables
-
 
 # Make Build Dir
 mkdir -p llvm.build
