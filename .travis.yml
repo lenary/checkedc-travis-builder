@@ -1,5 +1,7 @@
 ---
-compiler: clang
+compiler:
+- clang
+- gcc
 language: c
 install: ./install.sh
 script:
@@ -9,13 +11,14 @@ script:
 # Which OSs to build on
 os:
 - linux
-# - osx
+- osx
 sudo: required
 dist: trusty
 
 # What directories to cache
 cache:
-  directories:
+- ccache
+- directories:
   - llvm
   - llvm.build
   - cmake

@@ -7,13 +7,15 @@ set -e
 # if cmake --version | grep $CMAKE_REQ_VERS > /dev/null; then
 #   echo "Using Installed CMake"
 #   CMAKE=`which cmake`
-if [ ! -d cmake ]; then
-
+if [ ! -d cmake/bin ]; then
   if [ $TRAVIS_OS_NAME = 'linux' ]; then
     CMAKE_DIR=cmake-3.7.2-Linux-x86_64
     CMAKE_URL="https://cmake.org/files/v3.7/cmake-3.7.2-Linux-x86_64.tar.gz"
   elif [ $TRAVIS_OS_NAME == "osx" ]; then
-    echo "TODO: CMake Install Mac"
+    CMAKE_DIR=cmake-3.7.2-Darwin-x86_64
+    CMAKE_URL="https://cmake.org/files/v3.7/cmake-3.7.2-Darwin-x86_64.tar.gz"
+  else
+    echo "Unknown Platform"
     exit 1
   fi
 
