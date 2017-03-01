@@ -4,8 +4,8 @@ compiler:
 - gcc
 language: c
 install:
-- ./install.sh
-- ./checkout.sh
+- ". ./install.sh"
+- ". ./checkout.sh"
 script:
 # Build executables
 - "make -j$(nproc) --no-print-directory -C llvm.build"
