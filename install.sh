@@ -11,9 +11,11 @@ fi
 if [ "${BUILD_OS_NAME}" = "linux" ]; then
   CMAKE_DIR=cmake-3.7.2-Linux-x86_64
   CMAKE_URL="https://cmake.org/files/v3.7/cmake-3.7.2-Linux-x86_64.tar.gz"
+  CMAKE_BIN_DIR="bin"
 elif [ "${BUILD_OS_NAME}" = "osx" ]; then
   CMAKE_DIR=cmake-3.7.2-Darwin-x86_64
   CMAKE_URL="https://cmake.org/files/v3.7/cmake-3.7.2-Darwin-x86_64.tar.gz"
+  CMAKE_BIN_DIR="CMake.app/Contents/bin"
 else
   echo "Unknown Platform"
   exit 1
@@ -24,16 +26,15 @@ if cmake --version | grep $CMAKE_REQ_VERS > /dev/null; then
   export CMAKE_OUR_BIN=`which cmake`
   echo "Using System CMake: ${CMAKE_OUR_BIN}"
 else
-  if [ ! -x cmake/bin/cmake ]; then
+  if [ ! -x cmake/${CMAKE_BIN_DIR}/cmake ]; then
+    rm -fr cmake
     curl -o cmake.tar.gz  $CMAKE_URL
     tar -xzf cmake.tar.gz
-    mv $CMAKE_DIR cmake
+    mv -T $CMAKE_DIR cmake
   fi
 
-  find cmake -name cmake -executable
-
-  export CMAKE_OUR_BIN="$(pwd)/cmake/bin/cmake"
-  export PATH="$(pwd)/cmake/bin:$PATH"
+  export CMAKE_OUR_BIN="$(pwd)/cmake/${CMAKE_BIN_DIR}/cmake"
+  export PATH="$(pwd)/cmake/${CMAKE_BIN_DIR}:$PATH"
   echo "Using Own CMake: ${CMAKE_OUR_BIN}"
   $CMAKE_OUR_BIN --version | grep -q $CMAKE_REQ_VERS
 fi
