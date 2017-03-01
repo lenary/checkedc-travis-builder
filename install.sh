@@ -30,6 +30,8 @@ else
     mv $CMAKE_DIR cmake
   fi
 
+  find cmake -name cmake -executable
+
   export CMAKE_OUR_BIN="$(pwd)/cmake/bin/cmake"
   export PATH="$(pwd)/cmake/bin:$PATH"
   echo "Using Own CMake: ${CMAKE_OUR_BIN}"
