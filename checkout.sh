@@ -20,7 +20,7 @@ function clone_or_update {
     git clone -q --depth ${CLONE_DEPTH} ${url} ${dir}
   else
     echo "Updating ${dir}"
-    (cd ${dir}; git -q fetch --update-shallow origin)
+    (cd ${dir}; git fetch -q --update-shallow origin)
   fi
 
   echo "Switching ${dir} to ${branch}"
@@ -58,7 +58,7 @@ $CMAKE_OUR_BIN -G "Unix Makefiles" \
 
 # Install lnt into the virtualenv we set up in install.sh
 (cd lnt;
-$LNT_VE_DIR/bin/python setup.py install)
+$LNT_VE_DIR/bin/python setup.py -q install)
 
 set +ue
 set +o pipefail

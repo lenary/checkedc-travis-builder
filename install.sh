@@ -54,7 +54,7 @@ fi
 
 # Virtualenv for LNT (cached)
 if [ ! -x llvm.lnt.ve/bin/python ]; then
-  virtualenv ./llvm.lnt.ve
+  virtualenv -q ./llvm.lnt.ve
 fi
 export LNT_VE_DIR="$(pwd)/llvm.lnt.ve"
 
