@@ -35,7 +35,7 @@ All the following commands should be run within the current directory.
   that the logs are kept seperate (this produces lots of logs, most of which are useless).
 - Run `make -j${NPROC} --no-print-directory -C llvm.build --keep-going check-checkedc check-clang`,
   which goes into llvm.build and runs the checkedc tests and clang regression tests
-- Run `./llvm.lnt.ve/bin/lnt runtest nt -j ${NPROC} --sandbox ./llvm.lnt.sandbox --cc ./llvm.build/bin/clang --test-suite ./llvm-test-suite --cflags -fcheckedc-extension`,
+- Run `./llvm.lnt.ve/bin/lnt runtest nt --sandbox ./llvm.lnt.sandbox --cc ./llvm.build/bin/clang --test-suite ./llvm-test-suite --cflags -fcheckedc-extension`,
   which runs the full llvm test suite, benchmarks and all.
 
 `build.sh` will run all these steps except `install-pkgs.sh`.

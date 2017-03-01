@@ -16,7 +16,7 @@ make -j${NPROC} --no-print-directory -C llvm.build
 make -j${NPROC} --no-print-directory -C llvm.build --keep-going \
   check-checkedc check-clang
 
-$LNT_VE_DIR/bin/lnt runtest nt -j${NPROC} \
+$LNT_VE_DIR/bin/lnt runtest nt \
   --sandbox ./llvm.lnt.sandbox \
   --cc ./llvm.build/bin/clang \
   --test-suite ./llvm-test-suite \
