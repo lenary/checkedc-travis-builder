@@ -25,10 +25,11 @@ All the following commands should be run within the current directory.
 
 - On non-travis platforms, run `install-pkgs.sh`, it may need sudo, and can probably just be done once.
 - Run `install.sh`, this installs things travis can't install for us, like the correct version of cmake
-  and sets up a python virtualenv for LNT.
+  and sets up a python virtualenv for LNT. This exports some environment variables for `checkout.sh`, =
+  so will need to be run as `. ./install.sh`
 - Run `checkout.sh`, which checks out all the repositories into the correct directory structure, and
   checks out the correct branches for the build. It then uses cmake to make a build directory, installs lnt
-  into the virtualenv that `install.sh` created.
+  into the virtualenv that `install.sh` created. It's probably sensible to run this as `. ./checkout.sh` too.
 - Run `make -j$(nproc) --no-print-directory -C llvm.build`, which goes into the llvm.build directory
   and builds all the executables, including clang.
 - Run `make -j$(nproc) --no-print-directory -C llvm.build --keep-going check-checkedc check-clang`,
