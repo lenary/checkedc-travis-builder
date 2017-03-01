@@ -8,7 +8,9 @@ if [ -n "${TRAVIS_OS_NAME:-}" ]; then
   export BUILD_OS_NAME=$TRAVIS_OS_NAME
 fi
 
-echo "nproc: $(nproc)"
+local NPROC_LIMIT=8
+export NPROC=`awk "BEGIN { nproc=$(nproc); if (nproc > ${NPROC_LIMIT}) { print ${NPROC_LIMIT} } else { print nproc } }"`
+echo "NPROC=$(NPROC)"
 
 if [ "${BUILD_OS_NAME}" = "linux" ]; then
   CMAKE_DIR=cmake-3.7.2-Linux-x86_64

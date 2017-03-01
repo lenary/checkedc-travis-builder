@@ -16,12 +16,15 @@ function clone_or_update {
   local branch=${3:-master}
 
   if [ ! -d ${dir}/.git ]; then
-    git clone --depth ${CLONE_DEPTH} ${url} ${dir}
+    echo "Cloning ${url} to ${dir}"
+    git clone -q --depth ${CLONE_DEPTH} ${url} ${dir}
   else
-    (cd ${dir}; git fetch --update-shallow origin)
+    echo "Updating ${dir}"
+    (cd ${dir}; git -q fetch --update-shallow origin)
   fi
 
-  (cd ${dir}; git checkout $branch; git pull origin $branch)
+  echo "Switching ${dir} to ${branch}"
+  (cd ${dir}; git checkout -qf $branch; git pull -fq origin $branch)
 }
 
 # TODO: Choose branches intelligently

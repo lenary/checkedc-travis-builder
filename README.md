@@ -30,12 +30,12 @@ All the following commands should be run within the current directory.
 - Run `checkout.sh`, which checks out all the repositories into the correct directory structure, and
   checks out the correct branches for the build. It then uses cmake to make a build directory, installs lnt
   into the virtualenv that `install.sh` created. It's probably sensible to run this as `. ./checkout.sh` too.
-- Run `make -j$(nproc) --no-print-directory -C llvm.build`, which goes into the llvm.build directory
+- Run `make -j${NPROC} --no-print-directory -C llvm.build`, which goes into the llvm.build directory
   and builds all the executables, including clang. This is a seperate step to the next one on travis so
   that the logs are kept seperate (this produces lots of logs, most of which are useless).
-- Run `make -j$(nproc) --no-print-directory -C llvm.build --keep-going check-checkedc check-clang`,
+- Run `make -j${NPROC} --no-print-directory -C llvm.build --keep-going check-checkedc check-clang`,
   which goes into llvm.build and runs the checkedc tests and clang regression tests
-- Run `./llvm.lnt.ve/bin/lnt runtest nt -j $(nproc) --sandbox ./llvm.lnt.sandbox --cc ./llvm.build/bin/clang --test-suite ./llvm-test-suite --cflags -fcheckedc-extension`,
+- Run `./llvm.lnt.ve/bin/lnt runtest nt -j ${NPROC} --sandbox ./llvm.lnt.sandbox --cc ./llvm.build/bin/clang --test-suite ./llvm-test-suite --cflags -fcheckedc-extension`,
   which runs the full llvm test suite, benchmarks and all.
 
 `build.sh` will run all these steps except `install-pkgs.sh`.
@@ -51,6 +51,7 @@ Currently we assume that you have the following installed already:
 - Make
 - python 2.7 and virtualenv
 - `nproc` command/utility (seems to be in GNU coreutils)
+- awk. Because bash doesn't have a `minimum` function
 - Anything else you need installed to build Clang.
 
 ## Caching

@@ -8,11 +8,11 @@ install:
 - ". ./checkout.sh"
 script:
 # Build executables
-- "make -j$(nproc) --no-print-directory -C llvm.build"
+- "make -j${NPROC} --no-print-directory -C llvm.build"
 # Run tests (check-checkedc and check-clang)
-- "make -j$(nproc) --no-print-directory -C llvm.build --keep-going check-checkedc check-clang"
+- "make -j${NPROC} --no-print-directory -C llvm.build --keep-going check-checkedc check-clang"
 # Run external tests
-- "./llvm.lnt.ve/bin/lnt runtest nt -j$(nproc) --sandbox ./llvm.lnt.sandbox --cc ./llvm.build/bin/clang --test-suite ./llvm-test-suite --cflags -fcheckedc-extension"
+- "./llvm.lnt.ve/bin/lnt runtest nt -j${NPROC} --sandbox ./llvm.lnt.sandbox --cc ./llvm.build/bin/clang --test-suite ./llvm-test-suite --cflags -fcheckedc-extension"
 
 # Which OSs to build on
 os:
