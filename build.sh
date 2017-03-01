@@ -11,12 +11,12 @@ fi
 . ./install.sh
 . ./checkout.sh
 
-make -j$(nproc) --no-print-directory -C llvm.build
+make -j${NPROC} --no-print-directory -C llvm.build
 
-make -j$(nproc) --no-print-directory -C llvm.build --keep-going \
+make -j${NPROC} --no-print-directory -C llvm.build --keep-going \
   check-checkedc check-clang
 
-$LNT_VE_DIR/bin/lnt runtest nt -j$(nproc) \
+$LNT_VE_DIR/bin/lnt runtest nt -j${NPROC} \
   --sandbox ./llvm.lnt.sandbox \
   --cc ./llvm.build/bin/clang \
   --test-suite ./llvm-test-suite \

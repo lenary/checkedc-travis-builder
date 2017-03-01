@@ -46,6 +46,10 @@ The scripts assume Linux (Ubuntu 14.04) or OS X. The environment variable
 `BUILD_OS_NAME` should be set to 'linux' or 'osx' respectively
 (the scripts will find the correct value for this if they're running on travis-ci.org).
 
+If you want to control the degree of parallelism required, export `NPROC_LIMIT` set to
+the maximum number of cores you want compilation to use. The default limit is 8. If `nproc` 
+returns a lower value than limit, that will be used instead of the limit.
+
 Currently we assume that you have the following installed already:
 - a C/C++ compiler (clang/gcc)
 - Make
