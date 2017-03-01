@@ -8,6 +8,11 @@ if [ -n "${TRAVIS_OS_NAME:-}" ]; then
   export BUILD_OS_NAME=$TRAVIS_OS_NAME
 fi
 
+. ./install.sh
+. ./checkout.sh
+
+make -j$(nproc) --no-print-directory -C llvm.build
+
 make -j$(nproc) --no-print-directory -C llvm.build --keep-going \
   check-checkedc check-clang
 

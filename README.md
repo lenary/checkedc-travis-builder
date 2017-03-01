@@ -38,6 +38,8 @@ All the following commands should be run within the current directory.
 - Run `./llvm.lnt.ve/bin/lnt runtest nt -j $(nproc) --sandbox ./llvm.lnt.sandbox --cc ./llvm.build/bin/clang --test-suite ./llvm-test-suite --cflags -fcheckedc-extension`,
   which runs the full llvm test suite, benchmarks and all.
 
+`build.sh` will run all these steps except `install-pkgs.sh`.
+
 ## Requirements
 
 The scripts assume Linux (Ubuntu 14.04) or OS X. The environment variable
@@ -48,6 +50,8 @@ Currently we assume that you have the following installed already:
 - a C/C++ compiler (clang/gcc)
 - Make
 - python 2.7 and virtualenv
+- `nproc` command/utility (seems to be in GNU coreutils)
+- Anything else you need installed to build Clang.
 
 ## Caching
 
