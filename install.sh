@@ -23,10 +23,13 @@ CMAKE_REQ_VERS=3.7.2
 if cmake --version | grep $CMAKE_REQ_VERS > /dev/null; then
   export CMAKE_OUR_BIN=`which cmake`
   echo "Using System CMake: ${CMAKE_OUR_BIN}"
-elif [ ! -x cmake/bin/cmake ]; then
-  curl -o cmake.tar.gz  $CMAKE_URL
-  tar -xzf cmake.tar.gz
-  mv $CMAKE_DIR cmake
+else
+  if [ ! -x cmake/bin/cmake ]; then
+    curl -o cmake.tar.gz  $CMAKE_URL
+    tar -xzf cmake.tar.gz
+    mv $CMAKE_DIR cmake
+  fi
+
   export CMAKE_OUR_BIN="$(pwd)/cmake/bin/cmake"
   export PATH="$(pwd)/cmake/bin:$PATH"
   echo "Using Own CMake: ${CMAKE_OUR_BIN}"
@@ -45,3 +48,6 @@ fi
 # Virtualenv for LNT (cached)
 virtualenv ./llvm.lnt.ve
 export LNT_VE_DIR=$(pwd)/llvm.lnt.ve
+
+set +ue
+set +o pipefail

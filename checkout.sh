@@ -51,3 +51,6 @@ $CMAKE_OUR_BIN -G "Unix Makefiles" -DLLVM_TARGETS_TO_BUILD="X86" -DCMAKE_BUILD_T
 # Install lnt
 (cd lnt;
 $LNT_VE_DIR/bin/python setup.py install)
+
+set +ue
+set +o pipefail
