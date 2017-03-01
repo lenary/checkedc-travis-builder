@@ -46,8 +46,10 @@ elif [ $BUILD_OS_NAME == "osx" ]; then
 fi
 
 # Virtualenv for LNT (cached)
-virtualenv ./llvm.lnt.ve
-export LNT_VE_DIR=$(pwd)/llvm.lnt.ve
+if [ -x llvm.lnt.ve/bin/python ]; then
+  virtualenv ./llvm.lnt.ve
+fi
+export LNT_VE_DIR="$(pwd)/llvm.lnt.ve"
 
 set +ue
 set +o pipefail
