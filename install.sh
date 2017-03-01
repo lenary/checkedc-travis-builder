@@ -8,6 +8,8 @@ if [ -n "${TRAVIS_OS_NAME:-}" ]; then
   export BUILD_OS_NAME=$TRAVIS_OS_NAME
 fi
 
+echo "nproc: $(nproc)"
+
 if [ "${BUILD_OS_NAME}" = "linux" ]; then
   CMAKE_DIR=cmake-3.7.2-Linux-x86_64
   CMAKE_URL="https://cmake.org/files/v3.7/cmake-3.7.2-Linux-x86_64.tar.gz"
