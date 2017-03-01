@@ -30,15 +30,15 @@ if cmake --version | grep $CMAKE_REQ_VERS > /dev/null; then
   export CMAKE_OUR_BIN=`which cmake`
   echo "Using System CMake: ${CMAKE_OUR_BIN}"
 else
-  if [ ! -x cmake/${CMAKE_BIN_DIR}/cmake ]; then
-    rm -fr cmake
+  if [ ! -x cmake/${CMAKE_DIR}/${CMAKE_BIN_DIR}/cmake ]; then
+    mkdir -p cmake
     curl -o cmake.tar.gz  $CMAKE_URL
     tar -xzf cmake.tar.gz
-    mv -T $CMAKE_DIR cmake
+    mv $CMAKE_DIR cmake
   fi
 
-  export CMAKE_OUR_BIN="$(pwd)/cmake/${CMAKE_BIN_DIR}/cmake"
-  export PATH="$(pwd)/cmake/${CMAKE_BIN_DIR}:$PATH"
+  export CMAKE_OUR_BIN="$(pwd)/cmake/${CMAKE_DIR}/${CMAKE_BIN_DIR}/cmake"
+  export PATH="$(pwd)/cmake/${CMAKE_DIR}/${CMAKE_BIN_DIR}:$PATH"
   echo "Using Own CMake: ${CMAKE_OUR_BIN}"
   $CMAKE_OUR_BIN --version | grep -q $CMAKE_REQ_VERS
 fi
