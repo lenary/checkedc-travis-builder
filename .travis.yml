@@ -50,3 +50,7 @@ matrix:
   exclude:
   - compiler: gcc
     os: osx
+
+# Switch off email notifications for the moment
+notifications:
+  email: false
