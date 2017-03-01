@@ -44,11 +44,11 @@ clone_or_update llvm-test-suite https://github.com/Microsoft/checkedc-llvm-test-
 # Make Build Dir
 mkdir -p llvm.build
 
-# Run CMake for llvm.build, and first make pass (to keep first build logs with install) (cached)
+# Run CMake for llvm.build (cached), uses cmake setup in install.sh
 (cd llvm.build;
 $CMAKE_OUR_BIN -G "Unix Makefiles" -DLLVM_TARGETS_TO_BUILD="X86" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=On ../llvm)
 
-# Install lnt
+# Install lnt into the virtualenv we set up in install.sh
 (cd lnt;
 $LNT_VE_DIR/bin/python setup.py install)
 

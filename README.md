@@ -31,7 +31,8 @@ All the following commands should be run within the current directory.
   checks out the correct branches for the build. It then uses cmake to make a build directory, installs lnt
   into the virtualenv that `install.sh` created. It's probably sensible to run this as `. ./checkout.sh` too.
 - Run `make -j$(nproc) --no-print-directory -C llvm.build`, which goes into the llvm.build directory
-  and builds all the executables, including clang.
+  and builds all the executables, including clang. This is a seperate step to the next one on travis so
+  that the logs are kept seperate (this produces lots of logs, most of which are useless).
 - Run `make -j$(nproc) --no-print-directory -C llvm.build --keep-going check-checkedc check-clang`,
   which goes into llvm.build and runs the checkedc tests and clang regression tests
 - Run `./llvm.lnt.ve/bin/lnt runtest nt -j $(nproc) --sandbox ./llvm.lnt.sandbox --cc ./llvm.build/bin/clang --test-suite ./llvm-test-suite --cflags -fcheckedc-extension`,
