@@ -53,7 +53,7 @@ $CMAKE_OUR_BIN -G "Unix Makefiles" \
   -DLLVM_TARGETS_TO_BUILD="X86" \
   -DCMAKE_BUILD_TYPE=Release \
   -DLLVM_ENABLE_ASSERTIONS=On \
-  -DLLVM_LIT_ARGS="-sv --no-progress-bar --show-unsupported" \
+  -DLLVM_LIT_ARGS="-sv --no-progress-bar" \
   ../llvm)
 
 # Install lnt into the virtualenv we set up in install.sh
