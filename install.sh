@@ -8,22 +8,24 @@ if [ -n "${TRAVIS_OS_NAME:-}" ]; then
   export BUILD_OS_NAME=$TRAVIS_OS_NAME
 fi
 
-# NPROC_LIMIT defaults to 8. Export it to control the limit
-export NPROC=`awk "BEGIN { nproc=$(nproc); limit=${NPROC_LIMIT:-8}; if (nproc > limit) { print limit } else { print nproc } }"`
-echo "NPROC=${NPROC}"
-
 if [ "${BUILD_OS_NAME}" = "linux" ]; then
   CMAKE_DIR=cmake-3.7.2-Linux-x86_64
   CMAKE_URL="https://cmake.org/files/v3.7/cmake-3.7.2-Linux-x86_64.tar.gz"
   CMAKE_BIN_DIR="bin"
+  NPROC=$(nproc)
 elif [ "${BUILD_OS_NAME}" = "osx" ]; then
   CMAKE_DIR=cmake-3.7.2-Darwin-x86_64
   CMAKE_URL="https://cmake.org/files/v3.7/cmake-3.7.2-Darwin-x86_64.tar.gz"
   CMAKE_BIN_DIR="CMake.app/Contents/bin"
+  NPROC=$(sysctl -n hw.ncpu)
 else
   echo "Unknown Platform"
   exit 1
 fi
+
+# NPROC_LIMIT defaults to 8. Export it to control the limit
+export NPROC=`awk "BEGIN { limit=${NPROC_LIMIT:-8}; print (${NPROC} < limit) ? ${NPROC} : limit ;}"`
+echo "Running with -j${NPROC}"
 
 CMAKE_REQ_VERS=3.7.2
 if cmake --version | grep $CMAKE_REQ_VERS > /dev/null; then
