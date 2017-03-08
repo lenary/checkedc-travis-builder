@@ -1,3 +1,13 @@
+# Superseded
+
+This repo has been superseded by scripts in 
+[the automation/unix directory of checkedc-clang repository](https://github.com/Microsoft/checkedc-clang/tree/master/automation/unix).
+Please use those instead, this repository is no longer maintained.
+
+Original README below.
+
+---
+
 # Build System for Checked C
 
 Because Building Clang/LLVM is actually really complicated, we have
