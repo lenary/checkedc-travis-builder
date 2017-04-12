@@ -20,7 +20,7 @@ function clone_or_update {
     git clone -q --no-single-branch --depth ${CLONE_DEPTH} ${url} ${dir}
   else
     echo "Updating ${dir}"
-    (cd ${dir}; git fetch -q --depth ${CLONE_DEPTH} --update-shallow ${url} ${branch})
+    (cd ${dir}; git fetch -q --depth ${CLONE_DEPTH} --update-shallow origin)
   fi
 
   (cd ${dir}; git checkout -q ${branch})

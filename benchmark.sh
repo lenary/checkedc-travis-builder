@@ -28,7 +28,7 @@ export MULTISAMPLE=10
 ./checkout.sh
 ./configure.sh
 
-make -j${NPROC} --no-print-directory -C llvm.build
+make -j${NPROC} --no-print-directory -C llvm.build check-checkedc
 
 echo "================= RUNNING BMs: baseline ================="
 
@@ -50,7 +50,7 @@ export CHECKEDC_TESTS_HEAD=9fb740a90b86a59803dba39ebb256bc9ea5fef54
 ./checkout.sh
 ./configure.sh
 
-make -j${NPROC} --no-print-directory -C llvm.build clang
+make -j${NPROC} --no-print-directory -C llvm.build check-checkedc
 
 echo "================= RUNNING BMs: converted ================="
 
