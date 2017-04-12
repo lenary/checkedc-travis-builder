@@ -20,45 +20,26 @@ function clone_or_update {
     git clone -q --depth ${CLONE_DEPTH} ${url} ${dir}
   else
     echo "Updating ${dir}"
-    (cd ${dir}; git fetch -uq --depth ${CLONE_DEPTH} --update-shallow origin)
+    (cd ${dir}; git fetch -q --depth ${CLONE_DEPTH} --update-shallow ${url} ${branch})
   fi
 
-  echo "Switching ${dir} to ${branch}"
-  (cd ${dir}; git checkout -qf $branch; git pull -fq origin $branch)
+  (cd ${dir}; git checkout -q ${branch})
 }
 
-# TODO: Choose branches intelligently
-
 # Check out LLVM
-clone_or_update llvm https://github.com/Microsoft/checkedc-llvm master
+clone_or_update llvm https://github.com/Microsoft/checkedc-llvm ${CHECKEDC_LLVM_HEAD}
 
 # Check out Clang
-clone_or_update llvm/tools/clang https://github.com/Microsoft/checkedc-clang master
+clone_or_update llvm/tools/clang https://github.com/Microsoft/checkedc-clang ${CHECKEDC_CLANG_HEAD}
 
 # Check out Checked C Tests
-clone_or_update llvm/projects/checkedc-wrapper/checkedc https://github.com/Microsoft/checkedc master
+clone_or_update llvm/projects/checkedc-wrapper/checkedc https://github.com/Microsoft/checkedc ${CHECKEDC_SPEC_HEAD}
 
 # Check out LNT
-clone_or_update lnt https://github.com/llvm-mirror/lnt master
+clone_or_update lnt https://github.com/Microsoft/checkedc-lnt ${CHECKEDC_LNT_HEAD}
 
 # Check out Test Suite
-clone_or_update llvm-test-suite https://github.com/Microsoft/checkedc-llvm-test-suite master
-
-# Make Build Dir
-mkdir -p llvm.build
-
-# Run CMake for llvm.build (cached), uses cmake setup in install.sh
-(cd llvm.build;
-$CMAKE_OUR_BIN -G "Unix Makefiles" \
-  -DLLVM_TARGETS_TO_BUILD="X86" \
-  -DCMAKE_BUILD_TYPE=Release \
-  -DLLVM_ENABLE_ASSERTIONS=On \
-  -DLLVM_LIT_ARGS="-sv --no-progress-bar" \
-  ../llvm)
-
-# Install lnt into the virtualenv we set up in install.sh
-(cd lnt;
-$LNT_VE_DIR/bin/python setup.py -q install)
+clone_or_update llvm-test-suite https://github.com/Microsoft/checkedc-llvm-test-suite ${CHECKEDC_TESTS_HEAD}
 
 set +ue
 set +o pipefail

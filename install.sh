@@ -27,7 +27,7 @@ fi
 export NPROC=`awk "BEGIN { limit=${NPROC_LIMIT:-8}; print (${NPROC} < limit) ? ${NPROC} : limit ;}"`
 echo "Running with -j${NPROC}"
 
-CMAKE_REQ_VERS=3.7.2
+CMAKE_REQ_VERS=3.7
 if cmake --version | grep $CMAKE_REQ_VERS > /dev/null; then
   export CMAKE_OUR_BIN=`which cmake`
   echo "Using System CMake: ${CMAKE_OUR_BIN}"
@@ -45,20 +45,13 @@ else
   $CMAKE_OUR_BIN --version | grep -q $CMAKE_REQ_VERS
 fi
 
-if [ $BUILD_OS_NAME = 'linux' ]; then
-  # Handled by travis apt addon
-  true
-elif [ $BUILD_OS_NAME == "osx" ]; then
-  if [ -z `which bison` ]; then
-    brew install bison
-  fi
-fi
 
 # Virtualenv for LNT (cached)
 if [ ! -x llvm.lnt.ve/bin/python ]; then
   virtualenv -q ./llvm.lnt.ve
 fi
 export LNT_VE_DIR="$(pwd)/llvm.lnt.ve"
+export LNT_DB_DIR="$(pwd)/llvm.lnt.db"
 
 set +ue
 set +o pipefail
