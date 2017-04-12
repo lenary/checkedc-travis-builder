@@ -10,14 +10,16 @@ fi
 
 if [ "${BUILD_OS_NAME}" = "linux" ]; then
   EXTRA_ARGS="--use-perf=time"
+  TASKSET="taskset -c 6,7"
 elif [ "${BUILD_OS_NAME}" = "osx" ]; then
   EXTRA_ARGS=""
+  TASKSET=""
 else
   echo "Unknown Platform"
   exit 1
 fi
 
-$LNT_VE_DIR/bin/lnt runtest test_suite \
+exec $TASKSET $LNT_VE_DIR/bin/lnt runtest test_suite \
   --sandbox ${PWD}/llvm.lnt.sandbox \
   --cc ${PWD}/llvm.build/bin/clang \
   --use-lit ${PWD}/llvm.build/bin/llvm-lit \
@@ -33,8 +35,3 @@ $LNT_VE_DIR/bin/lnt runtest test_suite \
   --test-size=large \
   ${EXTRA_ARGS} \
   $@
-
- #
-
-set +ue
-set +o pipefail
