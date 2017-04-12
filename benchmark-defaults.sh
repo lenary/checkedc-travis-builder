@@ -20,6 +20,7 @@ fi
 $LNT_VE_DIR/bin/lnt runtest test_suite \
   --sandbox ${PWD}/llvm.lnt.sandbox \
   --cc ${PWD}/llvm.build/bin/clang \
+  --use-lit ${PWD}/llvm.build/bin/llvm-lit \
   --use-cmake=${CMAKE_OUR_BIN} \
   --test-suite ${PWD}/llvm-test-suite \
   --benchmarking-only \
