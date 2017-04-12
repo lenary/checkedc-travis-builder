@@ -9,7 +9,7 @@ if [ -n "${TRAVIS_OS_NAME:-}" ]; then
 fi
 
 if [ "${BUILD_OS_NAME}" = "linux" ]; then
-  EXTRA_ARGS="--use-perf=time --make-param='RUNUNDER=taskset -c ${TASKSET_CORE:-1}'"
+  EXTRA_ARGS="--use-perf=time"
 elif [ "${BUILD_OS_NAME}" = "osx" ]; then
   EXTRA_ARGS=""
 else
@@ -27,8 +27,8 @@ $LNT_VE_DIR/bin/lnt runtest test_suite \
   --submit=${LNT_DB_DIR} \
   --threads 1 \
   --build-threads 1 \
-  --compile-multisample=10 \
-  --exec-multisample=10 \
+  --compile-multisample=${MULTISAMPLE:-10} \
+  --exec-multisample=${MULTISAMPLE:-10} \
   --test-size=large \
   ${EXTRA_ARGS} \
   $@

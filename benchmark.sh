@@ -23,6 +23,7 @@ export CHECKEDC_TESTS_HEAD=a75815f0fdfeffd007c6d93b9b3633c1a727d9f3
 
 # In the middle, of the 96 cores of the machine we're running on
 export TASKSET_CORE=48
+export MULTISAMPLE=10
 
 ./checkout.sh
 ./configure.sh
