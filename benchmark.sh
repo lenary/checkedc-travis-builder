@@ -42,29 +42,29 @@ echo "================= RUNNING BMs: baseline ================="
 
 echo "================= DONE BMs: baseline ================="
 
-export BM_KIND=converted
-export CHECKEDC_CLANG_HEAD=8ad4042b757e461488d1c92ebec25753a8a518ae
-# TODO: Update this SHA
-export CHECKEDC_TESTS_HEAD=ac4374e0fc14aa6a43bc3f5f7b5552807036772e
+# export BM_KIND=converted
+# export CHECKEDC_CLANG_HEAD=8ad4042b757e461488d1c92ebec25753a8a518ae
+# # TODO: Update this SHA
+# export CHECKEDC_TESTS_HEAD=ac4374e0fc14aa6a43bc3f5f7b5552807036772e
 
-./checkout.sh
-./configure.sh
+# ./checkout.sh
+# ./configure.sh
 
-make -j${NPROC} --no-print-directory -C llvm.build check-checkedc
+# make -j${NPROC} --no-print-directory -C llvm.build check-checkedc
 
-echo "================= RUNNING BMs: converted ================="
+# echo "================= RUNNING BMs: converted ================="
 
-./benchmark-defaults.sh \
-  --only-test MultiSource/Benchmarks/Olden \
-  --run-order="${BM_KIND}-clang:${CHECKEDC_CLANG_HEAD:0:8}-suite:${CHECKEDC_TESTS_HEAD:0:8}-olden" \
-  --cflags="-fcheckedc-extension"
+# ./benchmark-defaults.sh \
+#   --only-test MultiSource/Benchmarks/Olden \
+#   --run-order="${BM_KIND}-clang:${CHECKEDC_CLANG_HEAD:0:8}-suite:${CHECKEDC_TESTS_HEAD:0:8}-olden" \
+#   --cflags="-fcheckedc-extension"
 
-./benchmark-defaults.sh \
-  --only-test MultiSource/Benchmarks/Ptrdist \
-  --run-order="${BM_KIND}-clang:${CHECKEDC_CLANG_HEAD:0:8}-suite:${CHECKEDC_TESTS_HEAD:0:8}-ptrdist" \
-  --cflags="-fcheckedc-extension"
+# ./benchmark-defaults.sh \
+#   --only-test MultiSource/Benchmarks/Ptrdist \
+#   --run-order="${BM_KIND}-clang:${CHECKEDC_CLANG_HEAD:0:8}-suite:${CHECKEDC_TESTS_HEAD:0:8}-ptrdist" \
+#   --cflags="-fcheckedc-extension"
 
-echo "================= DONE BMs: converted ================="
+# echo "================= DONE BMs: converted ================="
 
 set +ue
 set +o pipefail
