@@ -25,10 +25,12 @@ export CHECKEDC_TESTS_HEAD=a75815f0fdfeffd007c6d93b9b3633c1a727d9f3
 export TASKSET_CORE=48
 export MULTISAMPLE=10
 
+export TARGETS_TO_BUILD="all llvm-lit"
+
 ./checkout.sh
 ./configure.sh
 
-make -j${NPROC} --no-print-directory -C llvm.build check-checkedc
+make -j${NPROC} --no-print-directory -C llvm.build -k ${TARGETS_TO_BUILD}
 
 echo "================= RUNNING BMs: baseline ================="
 
@@ -50,7 +52,7 @@ echo "================= DONE BMs: baseline ================="
 # ./checkout.sh
 # ./configure.sh
 
-# make -j${NPROC} --no-print-directory -C llvm.build check-checkedc
+# make -j${NPROC} --no-print-directory -C llvm.build -k ${TARGETS_TO_BUILD}
 
 # echo "================= RUNNING BMs: converted ================="
 
