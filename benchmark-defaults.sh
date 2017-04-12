@@ -9,7 +9,7 @@ if [ -n "${TRAVIS_OS_NAME:-}" ]; then
 fi
 
 if [ "${BUILD_OS_NAME}" = "linux" ]; then
-  EXTRA_ARGS="--use-perf=1 --make-param='RUNUNDER=taskset -c ${TASKSET_CORE:-1}'"
+  EXTRA_ARGS="--use-perf=time --make-param='RUNUNDER=taskset -c ${TASKSET_CORE:-1}'"
 elif [ "${BUILD_OS_NAME}" = "osx" ]; then
   EXTRA_ARGS=""
 else
