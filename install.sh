@@ -45,13 +45,13 @@ else
   $CMAKE_OUR_BIN --version | grep -q $CMAKE_REQ_VERS
 fi
 
-
-# Virtualenv for LNT (cached)
-if [ ! -x llvm.lnt.ve/bin/python ]; then
-  virtualenv -q ./llvm.lnt.ve
-fi
 export LNT_VE_DIR="$(pwd)/llvm.lnt.ve"
 export LNT_DB_DIR="$(pwd)/llvm.lnt.db"
+
+# Virtualenv for LNT (cached)
+if [ ! -x ${LNT_VE_DIR}/bin/python ]; then
+  virtualenv -q ${LNT_VE_DIR}
+fi
 
 set +ue
 set +o pipefail

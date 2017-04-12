@@ -10,10 +10,13 @@ fi
 
 # Install lnt into the virtualenv we set up in install.sh
 (cd lnt;
-${LNT_VE_DIR}/bin/python setup.py install)
+${LNT_VE_DIR}/bin/python setup.py -q install)
 
 # Create LNT DB
-${LNT_VE_DIR}/bin/lnt create ${LNT_DB_DIR}
+if [ ! -d ${LNT_DB_DIR} ]; then
+  ${LNT_VE_DIR}/bin/lnt create ${LNT_DB_DIR}
+fi
+
 
 # Make Build Dir
 mkdir -p llvm.build

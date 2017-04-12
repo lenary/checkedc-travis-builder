@@ -21,7 +21,7 @@ $LNT_VE_DIR/bin/lnt runtest test_suite \
   --sandbox ${PWD}/llvm.lnt.sandbox \
   --cc ${PWD}/llvm.build/bin/clang \
   --use-cmake=${CMAKE_OUR_BIN} \
-  --test-suite ${PWD}/checkedc-llvm-test-suite \
+  --test-suite ${PWD}/llvm-test-suite \
   --benchmarking-only \
   --succinct-compile-output \
   --submit=${LNT_DB_DIR} \
