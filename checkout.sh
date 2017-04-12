@@ -17,7 +17,7 @@ function clone_or_update {
 
   if [ ! -d ${dir}/.git ]; then
     echo "Cloning ${url} to ${dir}"
-    git clone -q --depth ${CLONE_DEPTH} ${url} ${dir}
+    git clone -q --no-single-branch --depth ${CLONE_DEPTH} ${url} ${dir}
   else
     echo "Updating ${dir}"
     (cd ${dir}; git fetch -q --depth ${CLONE_DEPTH} --update-shallow ${url} ${branch})
