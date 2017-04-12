@@ -9,7 +9,8 @@ if [ -n "${TRAVIS_OS_NAME:-}" ]; then
 fi
 
 # Install lnt into the virtualenv we set up in install.sh
-(cd lnt;
+(set -e;
+cd lnt;
 ${LNT_VE_DIR}/bin/python setup.py -q install)
 
 # Create LNT DB
@@ -17,12 +18,12 @@ if [ ! -d ${LNT_DB_DIR} ]; then
   ${LNT_VE_DIR}/bin/lnt create ${LNT_DB_DIR}
 fi
 
-
 # Make Build Dir
 mkdir -p llvm.build
 
 # Run CMake for llvm.build (cached), uses cmake setup in install.sh
-(cd llvm.build;
+(set -e;
+cd llvm.build;
 $CMAKE_OUR_BIN -G "Unix Makefiles" \
   -DLLVM_TARGETS_TO_BUILD="X86" \
   -DCMAKE_BUILD_TYPE=Release \
