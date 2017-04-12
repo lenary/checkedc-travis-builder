@@ -8,11 +8,11 @@ if [ -n "${TRAVIS_OS_NAME:-}" ]; then
   export BUILD_OS_NAME=$TRAVIS_OS_NAME
 fi
 
-. ./install.sh # Sets some environment variables that are useful.
+source ./install.sh # Sets some environment variables that are useful.
 
 # set the right variables for checkout
 
-export CHECKEDC_LLVM_HEAD=ed393c24a6f787399a623bad718be4d567d1d64a
+# export CHECKEDC_LLVM_HEAD=ed393c24a6f787399a623bad718be4d567d1d64a
 export CHECKEDC_SPEC_HEAD=e5b957f63e8639c4ef83c5e2ef798aa2c1112b35
 export CHECKEDC_LNT_HEAD=8dc13a3fbbd0109132046589efa7c3c6bcbba626
 
@@ -21,13 +21,13 @@ export BM_KIND=baseline
 export CHECKEDC_CLANG_HEAD=fc6245cf9dc945c35d7b1be78c92b970a1c5199d
 export CHECKEDC_TESTS_HEAD=a75815f0fdfeffd007c6d93b9b3633c1a727d9f3
 
-export TASKSET_CORE=1
+# In the middle, of the 96 cores of the machine we're running on
+export TASKSET_CORE=48
 
 ./checkout.sh
 ./configure.sh
 
-make -j${NPROC} --no-print-directory -C llvm.build --keep-going \
-  check-checkedc check-clang
+make -j${NPROC} --no-print-directory -C llvm.build
 
 echo "================= RUNNING BMs: baseline ================="
 
@@ -49,8 +49,7 @@ export CHECKEDC_TESTS_HEAD=9fb740a90b86a59803dba39ebb256bc9ea5fef54
 ./checkout.sh
 ./configure.sh
 
-make -j${NPROC} --no-print-directory -C llvm.build --keep-going \
-  check-checkedc check-clang
+make -j${NPROC} --no-print-directory -C llvm.build clang
 
 echo "================= RUNNING BMs: converted ================="
 

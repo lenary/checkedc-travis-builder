@@ -24,7 +24,7 @@ else
 fi
 
 # NPROC_LIMIT defaults to 8. Export it to control the limit
-export NPROC=`awk "BEGIN { limit=${NPROC_LIMIT:-8}; print (${NPROC} < limit) ? ${NPROC} : limit ;}"`
+export NPROC=`awk "BEGIN { limit=${NPROC_LIMIT:-16}; print (${NPROC} < limit) ? ${NPROC} : limit ;}"`
 echo "Running with -j${NPROC}"
 
 CMAKE_REQ_VERS=3.7

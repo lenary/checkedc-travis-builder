@@ -27,19 +27,19 @@ function clone_or_update {
 }
 
 # Check out LLVM
-clone_or_update llvm https://github.com/Microsoft/checkedc-llvm ${CHECKEDC_LLVM_HEAD}
+clone_or_update llvm https://github.com/Microsoft/checkedc-llvm ${CHECKEDC_LLVM_HEAD:-master}
 
 # Check out Clang
-clone_or_update llvm/tools/clang https://github.com/Microsoft/checkedc-clang ${CHECKEDC_CLANG_HEAD}
+clone_or_update llvm/tools/clang https://github.com/Microsoft/checkedc-clang ${CHECKEDC_CLANG_HEAD:-master}
 
 # Check out Checked C Tests
-clone_or_update llvm/projects/checkedc-wrapper/checkedc https://github.com/Microsoft/checkedc ${CHECKEDC_SPEC_HEAD}
+clone_or_update llvm/projects/checkedc-wrapper/checkedc https://github.com/Microsoft/checkedc ${CHECKEDC_SPEC_HEAD:-master}
 
 # Check out LNT
-clone_or_update lnt https://github.com/Microsoft/checkedc-lnt ${CHECKEDC_LNT_HEAD}
+clone_or_update lnt https://github.com/Microsoft/checkedc-lnt ${CHECKEDC_LNT_HEAD:-master}
 
 # Check out Test Suite
-clone_or_update llvm-test-suite https://github.com/Microsoft/checkedc-llvm-test-suite ${CHECKEDC_TESTS_HEAD}
+clone_or_update llvm-test-suite https://github.com/Microsoft/checkedc-llvm-test-suite ${CHECKEDC_TESTS_HEAD:-master}
 
 set +ue
 set +o pipefail
