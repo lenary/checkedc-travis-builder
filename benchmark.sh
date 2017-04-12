@@ -45,7 +45,7 @@ echo "================= DONE BMs: baseline ================="
 export BM_KIND=converted
 export CHECKEDC_CLANG_HEAD=8ad4042b757e461488d1c92ebec25753a8a518ae
 # TODO: Update this SHA
-export CHECKEDC_TESTS_HEAD=9fb740a90b86a59803dba39ebb256bc9ea5fef54
+export CHECKEDC_TESTS_HEAD=ac4374e0fc14aa6a43bc3f5f7b5552807036772e
 
 ./checkout.sh
 ./configure.sh

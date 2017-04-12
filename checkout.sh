@@ -39,7 +39,7 @@ clone_or_update llvm/projects/checkedc-wrapper/checkedc https://github.com/Micro
 clone_or_update lnt https://github.com/Microsoft/checkedc-lnt ${CHECKEDC_LNT_HEAD:-master}
 
 # Check out Test Suite
-clone_or_update llvm-test-suite https://github.com/Microsoft/checkedc-llvm-test-suite ${CHECKEDC_TESTS_HEAD:-master}
+clone_or_update llvm-test-suite https://github.com/lenary/checkedc-llvm-test-suite ${CHECKEDC_TESTS_HEAD:-master}
 
 set +ue
 set +o pipefail
