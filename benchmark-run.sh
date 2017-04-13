@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+set -ue
+set -o pipefail
+
+: ${BM_KIND:=$1}
+
+TARGETS_TO_BUILD="all llvm-lit"
+export MULTISAMPLE=10
+
+./checkout.sh
+
+echo "============== BUILDING CLANG: ${BM_KIND} ================="
+
+# Run CMake for BUILD_DIR, uses cmake setup in install.sh
+pushd ${BUILD_DIR}
+
+$CMAKE_OUR_BIN \
+  -G "Unix Makefiles" \
+  -DLLVM_TARGETS_TO_BUILD="X86" \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DLLVM_ENABLE_ASSERTIONS=On \
+  -DLLVM_LIT_ARGS="-sv --no-progress-bar" \
+  ${CHECKOUT_DIR}/llvm
+
+make -j${NPROC} -k ${TARGETS_TO_BUILD}
+
+popd
+
+echo "================= RUNNING BMs: ${BM_KIND} ================="
+
+./benchmark-defaults.sh \
+  --only-test MultiSource/Benchmarks/Olden \
+  --run-order="${BM_KIND}-clang:${CHECKEDC_CLANG_HEAD:0:8}-suite:${CHECKEDC_TESTS_HEAD:0:8}-olden"
+
+./benchmark-defaults.sh \
+  --only-test MultiSource/Benchmarks/Ptrdist \
+  --run-order="${BM_KIND}-clang:${CHECKEDC_CLANG_HEAD:0:8}-suite:${CHECKEDC_TESTS_HEAD:0:8}-ptrdist"
+
+echo "==================== DONE BMs: ${BM_KIND} ================="
+
+set +ue
+set +o pipefail

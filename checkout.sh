@@ -11,8 +11,8 @@ fi
 CLONE_DEPTH=50
 
 function clone_or_update {
-  local dir=$1
-  local url=$2
+  local dir=${CHECKOUT_DIR}/${1}
+  local url=${2}
   local branch=${3:-master}
 
   if [ ! -d ${dir}/.git ]; then
@@ -20,10 +20,14 @@ function clone_or_update {
     git clone -q --no-single-branch --depth ${CLONE_DEPTH} ${url} ${dir}
   else
     echo "Updating ${dir}"
-    (set -e; cd ${dir}; git fetch -q --depth ${CLONE_DEPTH} --update-shallow origin)
+    pushd ${dir};
+    git fetch -q --depth ${CLONE_DEPTH} --update-shallow origin
+    popd
   fi
 
-  (set -e; cd ${dir}; git checkout -q ${branch})
+  pushd ${dir}
+  git checkout -fq origin/${branch}
+  popd
 }
 
 # Check out LLVM
@@ -35,10 +39,8 @@ clone_or_update llvm/tools/clang https://github.com/Microsoft/checkedc-clang ${C
 # Check out Checked C Tests
 clone_or_update llvm/projects/checkedc-wrapper/checkedc https://github.com/Microsoft/checkedc ${CHECKEDC_SPEC_HEAD:-master}
 
-# Check out LNT
-clone_or_update lnt https://github.com/Microsoft/checkedc-lnt ${CHECKEDC_LNT_HEAD:-master}
-
 # Check out Test Suite
+# TODO: Update URL
 clone_or_update llvm-test-suite https://github.com/lenary/checkedc-llvm-test-suite ${CHECKEDC_TESTS_HEAD:-master}
 
 set +ue

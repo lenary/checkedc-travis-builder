@@ -3,14 +3,9 @@
 set -ue
 set -o pipefail
 
-# If we're on travis, set BUILD_OS_NAME to be cross-build-system
-if [ -n "${TRAVIS_OS_NAME:-}" ]; then
-  export BUILD_OS_NAME=$TRAVIS_OS_NAME
-fi
-
 if [ "${BUILD_OS_NAME}" = "linux" ]; then
-  EXTRA_ARGS=""
-  TASKSET="taskset -c 6,7"
+  EXTRA_ARGS="--use-perf=time"
+  TASKSET="taskset -c 1"
 elif [ "${BUILD_OS_NAME}" = "osx" ]; then
   EXTRA_ARGS=""
   TASKSET=""
@@ -19,19 +14,19 @@ else
   exit 1
 fi
 
-exec $TASKSET $LNT_VE_DIR/bin/lnt runtest test_suite \
-  --sandbox ${PWD}/llvm.lnt.sandbox \
-  --cc ${PWD}/llvm.build/bin/clang \
-  --use-lit ${PWD}/llvm.build/bin/llvm-lit \
+exec $TASKSET \
+  $LNT_VE_DIR/bin/lnt runtest test_suite \
+  --sandbox ${TMPDIR} \
+  --cc ${BUILD_DIR}/bin/clang \
+  --use-lit ${BUILD_DIR}/bin/llvm-lit \
   --use-cmake=${CMAKE_OUR_BIN} \
-  --test-suite ${PWD}/llvm-test-suite \
-  --benchmarking-only \
-  --succinct-compile-output \
+  --test-suite ${CHECKOUT_DIR}/llvm-test-suite \
   --submit=${LNT_DB_DIR} \
   --threads 1 \
   --build-threads 1 \
-  --compile-multisample=${MULTISAMPLE:-10} \
-  --exec-multisample=${MULTISAMPLE:-10} \
+  --compile-multisample=${MULTISAMPLE} \
+  --exec-multisample=${MULTISAMPLE} \
   --test-size=large \
+  --succinct-compile-output \
   ${EXTRA_ARGS} \
   $@
