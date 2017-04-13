@@ -19,7 +19,7 @@ export CHECKEDC_LNT_HEAD=8dc13a3fbbd0109132046589efa7c3c6bcbba626
 
 export BM_KIND=baseline
 export CHECKEDC_CLANG_HEAD=fc6245cf9dc945c35d7b1be78c92b970a1c5199d
-export CHECKEDC_TESTS_HEAD=a75815f0fdfeffd007c6d93b9b3633c1a727d9f3
+export CHECKEDC_TESTS_HEAD=4d7ddeaa06b187c327f9a7d04d7f9e670c28fd53
 
 # In the middle, of the 96 cores of the machine we're running on
 export TASKSET_CORE=48
@@ -47,7 +47,7 @@ echo "================= DONE BMs: baseline ================="
 # export BM_KIND=converted
 # export CHECKEDC_CLANG_HEAD=8ad4042b757e461488d1c92ebec25753a8a518ae
 # # TODO: Update this SHA
-# export CHECKEDC_TESTS_HEAD=ac4374e0fc14aa6a43bc3f5f7b5552807036772e
+# export CHECKEDC_TESTS_HEAD=398d126b3360f0173b5b4436057c0d61c6b681c7
 
 # ./checkout.sh
 # ./configure.sh
