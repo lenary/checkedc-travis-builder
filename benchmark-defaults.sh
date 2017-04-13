@@ -9,7 +9,7 @@ if [ -n "${TRAVIS_OS_NAME:-}" ]; then
 fi
 
 if [ "${BUILD_OS_NAME}" = "linux" ]; then
-  EXTRA_ARGS="--use-perf=time"
+  EXTRA_ARGS=""
   TASKSET="taskset -c 6,7"
 elif [ "${BUILD_OS_NAME}" = "osx" ]; then
   EXTRA_ARGS=""
