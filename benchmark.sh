@@ -16,7 +16,6 @@ exec 2&>1
 
 : ${BUILD_OS_NAME:=linux}
 SCRIPTS_DIR=$(dirname ${BASH_SOURCE[0]})
-LNT_VE_DIR="${CHECKOUT_DIR}/llvm.lnt.ve"
 LNT_DB_DIR="${RESULTS_DIR}/llvm.lnt.db"
 
 export BUILD_OS_NAME
@@ -24,7 +23,6 @@ export CHECKOUT_DIR
 export BUILD_DIR
 export RESULTS_DIR
 export SCRIPTS_DIR
-export LNT_VE_DIR
 export LNT_DB_DIR
 
 # Makes sure all the scripts in here are up to date with a given branch

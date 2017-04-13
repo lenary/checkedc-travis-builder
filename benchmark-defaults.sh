@@ -15,7 +15,7 @@ else
 fi
 
 exec $TASKSET \
-  $LNT_VE_DIR/bin/lnt runtest test_suite \
+  lnt runtest test_suite \
   --sandbox ${TMPDIR} \
   --cc ${BUILD_DIR}/bin/clang \
   --use-lit ${BUILD_DIR}/bin/llvm-lit \

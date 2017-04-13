@@ -37,17 +37,12 @@ else
 fi
 export CMAKE_OUR_BIN
 
-# Create LNT DB (Has to happen after LNT is setup)
+# Make Build Dirs
+mkdir -p ${CHECKOUT_DIR}
+mkdir -p ${BUILD_DIR}
+mkdir -p ${RESULTS_DIR}
+
+# Create LNT DB
 if [ ! -d ${LNT_DB_DIR} ]; then
-  ${LNT_VE_DIR}/bin/lnt create ${LNT_DB_DIR}
-fi
-
-# Create Results Dir
-if [ ! -d "${RESULTS_DIR}" ]; then
-  mkdir -p ${RESULTS_DIR}
-fi
-
-# Make Build Dir
-if [ ! -d "${BUILD_DIR}" ]; then
-  mkdir -p ${BUILD_DIR}
+  lnt create ${LNT_DB_DIR}
 fi
