@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+echo "Making Build Dirs..."
+# Make Build Dirs
+mkdir -p ${CHECKOUT_DIR}
+mkdir -p ${BUILD_DIR}
+mkdir -p ${RESULTS_DIR}
+
 if [ "${BUILD_OS_NAME}" = "linux" ]; then
   CMAKE_DIR=cmake-3.7.2-Linux-x86_64
   CMAKE_URL="https://cmake.org/files/v3.7/cmake-3.7.2-Linux-x86_64.tar.gz"
@@ -37,10 +43,10 @@ else
 fi
 export CMAKE_OUR_BIN
 
-# Make Build Dirs
-mkdir -p ${CHECKOUT_DIR}
-mkdir -p ${BUILD_DIR}
-mkdir -p ${RESULTS_DIR}
+if [ ! -e `which lnt` ]; then
+  echo "LNT Not Found"
+  exit 1
+fi
 
 # Create LNT DB
 if [ ! -d ${LNT_DB_DIR} ]; then
