@@ -12,7 +12,7 @@ set -o pipefail
 # Close stdin, Redirect all future stdout/stderr to a log in RESULTS_DIR
 exec <&- # Closes STDIN
 exec 1>${RESULTS_DIR}/checkedc-bm.log
-exec 2&>1
+exec 2>&1
 
 : ${BUILD_OS_NAME:=linux}
 SCRIPTS_DIR=$(dirname ${BASH_SOURCE[0]})
