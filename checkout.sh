@@ -21,6 +21,8 @@ function clone_or_update {
   else
     echo "Updating ${dir}"
     pushd ${dir};
+    git remote rm origin
+    git remote add origin ${url}
     git fetch -q --depth ${CLONE_DEPTH} --update-shallow origin
     popd
   fi
