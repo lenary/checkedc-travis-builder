@@ -7,7 +7,7 @@ EXTRA_ARGS=""
 TASKSET=""
 
 if [ "${BUILD_OS_NAME}" = "linux" ]; then
-  TASKSET="taskset -c 1"
+  TASKSET="taskset -c 0"
 fi
 
 mkdir -p ${BUILD_DIR}/sandbox
