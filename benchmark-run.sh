@@ -5,7 +5,7 @@ set -o pipefail
 
 : ${BM_KIND:=$1}
 
-TARGETS_TO_BUILD="all llvm-lit"
+TARGETS_TO_BUILD="all"
 export MULTISAMPLE=10
 
 ${SCRIPTS_DIR}/checkout.sh
