@@ -14,9 +14,11 @@ else
   exit 1
 fi
 
+mkdir -p ${TMPDIR}/sandbox
+
 exec $TASKSET \
   lnt runtest test_suite \
-  --sandbox ${TMPDIR} \
+  --sandbox ${TMPDIR}/sandbox \
   --cc ${BUILD_DIR}/bin/clang \
   --use-lit ${BUILD_DIR}/bin/llvm-lit \
   --use-cmake=${CMAKE_OUR_BIN} \
