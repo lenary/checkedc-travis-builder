@@ -27,4 +27,5 @@ exec $TASKSET \
   --test-size=large \
   --succinct-compile-output \
   ${EXTRA_ARGS} \
+  ${EXTRA_TEST_ARGS} \
   $@
