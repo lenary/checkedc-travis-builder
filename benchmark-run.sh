@@ -8,7 +8,7 @@ set -o pipefail
 TARGETS_TO_BUILD="all llvm-lit"
 export MULTISAMPLE=10
 
-./checkout.sh
+${SCRIPTS_DIR}/checkout.sh
 
 echo "============== BUILDING CLANG: ${BM_KIND} ================="
 
@@ -30,11 +30,11 @@ popd
 
 echo "================= RUNNING BMs: ${BM_KIND} ================="
 
-./benchmark-defaults.sh \
+${SCRIPTS_DIR}/benchmark-defaults.sh \
   --only-test MultiSource/Benchmarks/Olden \
   --run-order="${BM_KIND}-clang:${CHECKEDC_CLANG_HEAD:0:8}-suite:${CHECKEDC_TESTS_HEAD:0:8}-olden"
 
-./benchmark-defaults.sh \
+${SCRIPTS_DIR}/benchmark-defaults.sh \
   --only-test MultiSource/Benchmarks/Ptrdist \
   --run-order="${BM_KIND}-clang:${CHECKEDC_CLANG_HEAD:0:8}-suite:${CHECKEDC_TESTS_HEAD:0:8}-ptrdist"
 

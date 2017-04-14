@@ -32,21 +32,21 @@ export SCRIPTS_DIR
 export LNT_DB_DIR
 
 # Makes sure all the scripts in here are up to date with a given branch
-./update-scripts.sh ${SCRIPTS_DIR} ${SCRIPTS_BRANCH}
+${SCRIPTS_DIR}/update-scripts.sh ${SCRIPTS_DIR} ${SCRIPTS_BRANCH}
 
 # Sets some environment variables that are useful
 # Installs cmake too.
-source ./setup.sh
+source ${SCRIPTS_DIR}/setup.sh
 
 # Baseline
-source ./configure-common.sh
-source ./configure-baseline.sh
-./benchmark-run.sh baseline
+source ${SCRIPTS_DIR}/configure-common.sh
+source ${SCRIPTS_DIR}/configure-baseline.sh
+${SCRIPTS_DIR}/benchmark-run.sh baseline
 
 # Converted
-source ./configure-common.sh
-source ./configure-converted.sh
-./benchmark-run.sh converted
+source ${SCRIPTS_DIR}/configure-common.sh
+source ${SCRIPTS_DIR}/configure-converted.sh
+${SCRIPTS_DIR}/benchmark-run.sh converted
 
 # Export Results
 zip -r ${RESULTS_DIR}/${BM_TIME}/lnt-db.zip ${LNT_DB_DIR}
