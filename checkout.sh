@@ -26,7 +26,7 @@ function clone_or_update {
   fi
 
   pushd ${dir}
-  git checkout -fq origin/${branch}
+  git checkout -fq ${branch}
   popd
 }
 
