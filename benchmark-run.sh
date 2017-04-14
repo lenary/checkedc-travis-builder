@@ -12,8 +12,9 @@ export MULTISAMPLE=10
 
 echo "============== BUILDING CLANG: ${BM_KIND} ================="
 
+mkdir -p ${BUILD_DIR}/llvm
 # Run CMake for BUILD_DIR, uses cmake setup in install.sh
-pushd ${BUILD_DIR}
+pushd ${BUILD_DIR}/llvm
 
 $CMAKE_OUR_BIN \
   -G "Unix Makefiles" \

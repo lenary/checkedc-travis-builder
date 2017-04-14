@@ -9,14 +9,20 @@ set -o pipefail
 : ${RESULTS_DIR:=$3}
 : ${SCRIPTS_BRANCH:=${4:-benchmarking}}
 
+SCRIPTS_DIR=$(dirname ${BASH_SOURCE[0]})
+BM_TIME=$(date -Iminutes | tr 'T:+' '---')
+
+echo "Building On: ${BUILD_OS_NAME:=linux}"
+echo "Started at: ${BM_TIME}"
+
+echo "Results Dir: ${RESULTS_DIR}/${BM_TIME}"
+mkdir -p "${RESULTS_DIR}/${BM_TIME}"
+LNT_DB_DIR="${RESULTS_DIR}/${BM_TIME}/llvm.lnt.db"
+
 # Close stdin, Redirect all future stdout/stderr to a log in RESULTS_DIR
 # exec </dev/null # We can't do anything with stdin because if we do make dies
-exec 1>${RESULTS_DIR}/checkedc-bm.log
+exec 1>${RESULTS_DIR}/${BM_TIME}/checkedc-bm.log
 exec 2>&1
-
-: ${BUILD_OS_NAME:=linux}
-SCRIPTS_DIR=$(dirname ${BASH_SOURCE[0]})
-LNT_DB_DIR="${RESULTS_DIR}/llvm.lnt.db"
 
 export BUILD_OS_NAME
 export CHECKOUT_DIR
@@ -43,7 +49,9 @@ source ./configure-converted.sh
 ./benchmark-run.sh converted
 
 # Export Results
-zip -r ${RESULTS_DIR}/lnt_db.zip ${LNT_DB_DIR}
+zip -r ${RESULTS_DIR}/${BM_TIME}/lnt-db.zip ${LNT_DB_DIR}
+
+touch ${RESULTS_DIR}/${BM_TIME}/DONE
 
 set +ue
 set +o pipefail

@@ -14,13 +14,13 @@ else
   exit 1
 fi
 
-mkdir -p ${TMPDIR}/sandbox
+mkdir -p ${BUILD_DIR}/sandbox
 
 exec $TASKSET \
   lnt runtest test_suite \
-  --sandbox ${TMPDIR}/sandbox \
-  --cc ${BUILD_DIR}/bin/clang \
-  --use-lit ${BUILD_DIR}/bin/llvm-lit \
+  --sandbox ${BUILD_DIR}/sandbox \
+  --cc ${BUILD_DIR}/llvm/bin/clang \
+  --use-lit ${BUILD_DIR}/llvm/bin/llvm-lit \
   --use-cmake=${CMAKE_OUR_BIN} \
   --test-suite ${CHECKOUT_DIR}/llvm-test-suite \
   --submit=${LNT_DB_DIR} \
