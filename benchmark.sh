@@ -10,7 +10,7 @@ set -o pipefail
 : ${SCRIPTS_BRANCH:=${4:-benchmarking}}
 
 # Close stdin, Redirect all future stdout/stderr to a log in RESULTS_DIR
-exec </dev/null
+# exec </dev/null # We can't do anything with stdin because if we do make dies
 exec 1>${RESULTS_DIR}/checkedc-bm.log
 exec 2>&1
 
