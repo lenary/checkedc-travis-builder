@@ -22,6 +22,7 @@ else
 fi
 
 echo "Running with -j${NPROC}"
+export NPROC
 
 CMAKE_REQ_VERS=3.7
 if [ -e "$(which cmake)" ] && cmake --version | grep $CMAKE_REQ_VERS > /dev/null; then
