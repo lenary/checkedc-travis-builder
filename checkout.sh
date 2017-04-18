@@ -33,9 +33,6 @@ clone_or_update llvm https://github.com/Microsoft/checkedc-llvm ${CHECKEDC_LLVM_
 # Check out Clang
 clone_or_update llvm/tools/clang https://github.com/Microsoft/checkedc-clang ${CHECKEDC_CLANG_HEAD:-master}
 
-# Check out Checked C Tests
-clone_or_update llvm/projects/checkedc-wrapper/checkedc https://github.com/Microsoft/checkedc ${CHECKEDC_SPEC_HEAD:-master}
-
 # Check out Test Suite
 clone_or_update llvm-test-suite https://github.com/Microsoft/checkedc-llvm-test-suite ${CHECKEDC_TESTS_HEAD:-master}
 
