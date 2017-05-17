@@ -6,7 +6,7 @@ set -o pipefail
 : ${BM_KIND:=$1}
 
 TARGETS_TO_BUILD="all"
-export MULTISAMPLE=10
+export MULTISAMPLE=100
 
 ${SCRIPTS_DIR}/checkout.sh
 
