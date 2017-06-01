@@ -19,6 +19,7 @@ exec $TASKSET \
   --use-lit ${BUILD_DIR}/llvm/bin/llvm-lit \
   --use-cmake ${CMAKE_OUR_BIN} \
   --test-suite ${CHECKOUT_DIR}/llvm-test-suite \
+  --cmake-define "CHECKEDC_SPEC_DIR=${CHECKOUT_DIR}/llvm/projects/checkedc-wrapper/checkedc" \
   --submit ${LNT_DB_DIR} \
   --threads 1 \
   --build-threads 1 \
