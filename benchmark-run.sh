@@ -30,13 +30,11 @@ popd
 
 echo "================= RUNNING BMs: ${BM_KIND} ================="
 
-${SCRIPTS_DIR}/benchmark-defaults.sh \
-  --only-test MultiSource/Benchmarks/Olden \
-  --run-order="${BM_KIND}-clang:${CHECKEDC_CLANG_HEAD:0:8}-suite:${CHECKEDC_TESTS_HEAD:0:8}-olden"
+BRANCH=$(git branch --points-at HEAD --format '%(refname:short)')
 
 ${SCRIPTS_DIR}/benchmark-defaults.sh \
-  --only-test MultiSource/Benchmarks/Ptrdist \
-  --run-order="${BM_KIND}-clang:${CHECKEDC_CLANG_HEAD:0:8}-suite:${CHECKEDC_TESTS_HEAD:0:8}-ptrdist"
+  --only-test MultiSource/Benchmarks \
+  --run-order="${BM_KIND}-${BRANCH}-clang:${CHECKEDC_CLANG_HEAD:0:8}-suite:${CHECKEDC_TESTS_HEAD:0:8}"
 
 echo "==================== DONE BMs: ${BM_KIND} ================="
 
