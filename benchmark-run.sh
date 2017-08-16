@@ -30,7 +30,7 @@ popd
 
 echo "================= RUNNING BMs: ${BM_KIND} ================="
 
-BRANCH=$(git branch --points-at HEAD --format '%(refname:short)')
+BRANCH=$(git --git-dir=${SCRIPTS_DIR}/.git branch --points-at HEAD --format '%(refname:short)')
 
 ${SCRIPTS_DIR}/benchmark-defaults.sh \
   --only-test MultiSource/Benchmarks \
