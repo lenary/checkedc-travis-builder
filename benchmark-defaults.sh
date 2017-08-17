@@ -7,12 +7,15 @@ EXTRA_ARGS=""
 TASKSET=""
 
 if [ "${BUILD_OS_NAME}" = "linux" ]; then
-  TASKSET="taskset -c 0"
+  CPU=$(( RANDOM % NPROC ))
+  TASKSET="taskset -c $CPU"
 fi
 
 mkdir -p ${BUILD_DIR}/sandbox
 
-exec $TASKSET \
+set -x
+
+exec \
   lnt runtest test_suite \
   --sandbox ${BUILD_DIR}/sandbox \
   --cc ${BUILD_DIR}/llvm/bin/clang \
@@ -25,6 +28,7 @@ exec $TASKSET \
   --compile-multisample ${MULTISAMPLE} \
   --exec-multisample ${MULTISAMPLE} \
   --succinct-compile-output \
+  --run-under=${TASKSET} \
   ${EXTRA_ARGS} \
   ${EXTRA_TEST_ARGS} \
   $@
