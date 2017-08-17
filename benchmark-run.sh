@@ -33,8 +33,13 @@ echo "================= RUNNING BMs: ${BM_KIND} ================="
 BRANCH=$(git --git-dir=${SCRIPTS_DIR}/.git rev-parse --abbrev-ref HEAD)
 
 ${SCRIPTS_DIR}/benchmark-defaults.sh \
-  --only-test MultiSource/Benchmarks \
-  --run-order="${BM_KIND}-${BRANCH}-clang:${CHECKEDC_CLANG_HEAD:0:8}-suite:${CHECKEDC_TESTS_HEAD:0:8}"
+  --only-test MultiSource/Benchmarks/Olden \
+  --run-order="${BM_KIND}-${BRANCH}-olden-clang:${CHECKEDC_CLANG_HEAD:0:8}-suite:${CHECKEDC_TESTS_HEAD:0:8}"
+
+${SCRIPTS_DIR}/benchmark-defaults.sh \
+  --only-test MultiSource/Benchmarks/Ptrdist \
+  --run-order="${BM_KIND}-${BRANCH}-ptrdist-clang:${CHECKEDC_CLANG_HEAD:0:8}-suite:${CHECKEDC_TESTS_HEAD:0:8}"
+
 
 echo "==================== DONE BMs: ${BM_KIND} ================="
 
