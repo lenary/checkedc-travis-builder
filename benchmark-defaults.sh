@@ -28,7 +28,7 @@ exec \
   --compile-multisample ${MULTISAMPLE} \
   --exec-multisample ${MULTISAMPLE} \
   --succinct-compile-output \
-  --run-under=${TASKSET} \
+  --run-under="${TASKSET}" \
   ${EXTRA_ARGS} \
   ${EXTRA_TEST_ARGS} \
   $@
