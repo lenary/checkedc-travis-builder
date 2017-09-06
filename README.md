@@ -14,8 +14,8 @@ You'll need:
 - OS X or Linux. Set the `BUILD_OS_NAME` env variable to the string `linux` or `osx`.
 - Run `install-pkgs.sh`. If this doesn't work, take a look at the script and follow what it's attempting to do
   - installing required system packages
-  - installing LNT from our own repo, so that it's available globally
-  - There is a half-requirement on cmake 3.7+, if you don't have it, then later scripts will download a copy.
+  - installing [LNT from our own repo](https://github.com/Microsoft/checkedc-lnt), so that it's available globally
+  - There is a half-requirement on cmake 3.7+, if you don't have it, then scripts will download a copy.
 
 ## Running the benchmarks
 
