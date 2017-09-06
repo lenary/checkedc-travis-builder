@@ -1,4 +1,4 @@
-# Superseded
+# Checked C Benchmarking Scripts
 
 This repo has become its own lovecraftian mess.
 
