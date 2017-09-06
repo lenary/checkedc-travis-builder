@@ -17,15 +17,19 @@ LNT_DB_DIR="${RESULTS_DIR}/${BM_TIME}/llvm.lnt.db"
 
 # Close stdin, Redirect all future stdout/stderr to a log in RESULTS_DIR
 # exec </dev/null # We can't do anything with stdin because if we do make dies
-exec 1>${RESULTS_DIR}/${BM_TIME}/checkedc-bm.log
+exec 1> >(tee ${RESULTS_DIR}/${BM_TIME}/checkedc-bm.log)
 exec 2>&1
 
 # Print info for logfile
-echo "Building On: ${BUILD_OS_NAME:=linux}"
+echo "Building On: ${BUILD_OS_NAME}"
+echo "Checkout Dir: ${CHECKOUT_DIR}"
+echo "Build Dir: ${BUILD_DIR}"
 echo "Started at: ${BM_TIME}"
-echo "Results Dir: ${RESULTS_DIR}/${BM_TIME}"
+echo "Run Results Dir: ${RESULTS_DIR}/${BM_TIME}"
+echo "Scripts Branch: ${SCRIPTS_BRANCH}"
+
+# Mark as Running
 touch ${RESULTS_DIR}/${BM_TIME}/RUNNING
-echo "${BM_TIME} $$" >> ${RESULTS_DIR}/CURRENT
 
 export BUILD_OS_NAME
 export CHECKOUT_DIR
@@ -51,11 +55,12 @@ source ${SCRIPTS_DIR}/configure-common.sh
 source ${SCRIPTS_DIR}/configure-converted.sh
 ${SCRIPTS_DIR}/benchmark-run.sh converted
 
-# Export Results
-zip -r ${RESULTS_DIR}/${BM_TIME}/lnt-db.zip ${LNT_DB_DIR}
-
+# Mark as Done
 rm ${RESULTS_DIR}/${BM_TIME}/RUNNING
 touch ${RESULTS_DIR}/${BM_TIME}/DONE
+
+echo "Run Completed: ${RESULTS_DIR}/${BM_TIME}"
+echo "Ended At: $(date -Iseconds | tr 'T:+' '---')"
 
 set +ue
 set +o pipefail
