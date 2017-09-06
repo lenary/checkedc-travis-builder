@@ -35,7 +35,7 @@ You'll need:
 
 ## Script Callgraph
 
-1. `benchmark.sh`
+1. `benchmark.sh` sets some env variables, prints some build metadata
     1. `update-scripts.sh` which updates all the following scripts to the branch selected by invoking `benchmark.sh`. The most important changes are those to `configure-*.sh` which set the revs to benchmark.
     2. `setup.sh` which downloads cmake, sets the number of processes to run builds with, and creates the lnt results dir
     3. For baseline:
@@ -43,7 +43,7 @@ You'll need:
         2. source `configure-baseline.sh` to get clang rev and tests rev for the baseline build. (just sets env variables)
         3. `benchmark-run.sh`
             1. `checkout.sh` checks out the revs selected for all the repos
-            1. runs cmake, then does a full clang/llvm build
+            1. does a full clang/llvm build
             1. `benchmark-defaults.sh` for Olden: execs `lnt` with all the right arguments.
             2. `benchmark-defaults.sh` for Ptrdist: execs `lnt` with all the right arguments.
     4. For converted:
@@ -51,7 +51,6 @@ You'll need:
         2. source `configure-converted.sh` to get clang rev and tests rev (and extra clang args) for converted build.
         3. `benchmark-run.sh`
             1. `checkout.sh` checks out the revs selected for all the repos
-            1. runs cmake
             1. does a full clang/llvm build
-            1. `benchmark-defaults.sh` for Olden: execs `lnt` with all the right arguments.
-            2. `benchmark-defaults.sh` for Ptrdist: execs `lnt` with all the right arguments.
+            1. `benchmark-defaults.sh` for Olden: invokes `lnt` runner with all the right arguments.
+            2. `benchmark-defaults.sh` for Ptrdist: invokes `lnt` runner with all the right arguments.
