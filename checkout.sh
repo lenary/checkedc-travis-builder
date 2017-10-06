@@ -8,7 +8,7 @@ CLONE_DEPTH=50
 function clone_or_update {
   local dir=${CHECKOUT_DIR}/${1}
   local url=${2}
-  local branch=${3:-master}
+  local branch=${3}
 
   if [ ! -d ${dir}/.git ]; then
     echo "Cloning ${url} to ${dir}"
@@ -28,16 +28,16 @@ function clone_or_update {
 }
 
 # Check out LLVM
-clone_or_update llvm https://github.com/Microsoft/checkedc-llvm ${CHECKEDC_LLVM_HEAD:-master}
+clone_or_update llvm https://github.com/Microsoft/checkedc-llvm origin/${CHECKEDC_LLVM_BRANCH:-master}
 
 # Check out Clang
-clone_or_update llvm/tools/clang https://github.com/Microsoft/checkedc-clang ${CHECKEDC_CLANG_HEAD:-master}
+clone_or_update llvm/tools/clang https://github.com/Microsoft/checkedc-clang origin/${CHECKEDC_CLANG_BRANCH:-master}
 
 # Check out CheckedC Spec
-clone_or_update llvm/projects/checkedc-wrapper/checkedc https://github.com/Microsoft/checkedc.git ${CHECKEDC_SPEC_HEAD:-master}
+clone_or_update llvm/projects/checkedc-wrapper/checkedc https://github.com/Microsoft/checkedc.git origin/${CHECKEDC_SPEC_BRANCH:-master}
 
 # Check out Test Suite
-clone_or_update llvm-test-suite https://github.com/Microsoft/checkedc-llvm-test-suite ${CHECKEDC_TESTS_HEAD:-master}
+clone_or_update llvm-test-suite https://github.com/Microsoft/checkedc-llvm-test-suite origin/${CHECKEDC_TESTS_BRANCH:-master}
 
 set +ue
 set +o pipefail

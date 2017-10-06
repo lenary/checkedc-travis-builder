@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-export CHECKEDC_CLANG_HEAD=3aa549e82b42bbaaa6cf9f28e6286869d479f39a
-export CHECKEDC_TESTS_HEAD=b016d4da67898934d31b8fc25c74bc68a2211924
+export CHECKEDC_CLANG_BRANCH=baseline
+export CHECKEDC_TESTS_BRANCH=pre-conversion-benchmarks

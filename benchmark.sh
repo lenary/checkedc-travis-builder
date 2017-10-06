@@ -10,7 +10,7 @@ set -o pipefail
 : ${SCRIPTS_BRANCH:=${4:-benchmarking}}
 
 SCRIPTS_DIR=$(dirname ${BASH_SOURCE[0]})
-BM_TIME=$(date -Iseconds | tr 'T:+' '---')
+BM_TIME=$(date "+%Y-%m-%d-%H-%M-%S-%Z")
 
 mkdir -p "${RESULTS_DIR}/${BM_TIME}"
 LNT_DB_DIR="${RESULTS_DIR}/${BM_TIME}/llvm.lnt.db"

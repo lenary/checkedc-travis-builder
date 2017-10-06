@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export CHECKEDC_CLANG_HEAD=5da34c5cd07017a3e503b700107a8faf7fe48468
-export CHECKEDC_TESTS_HEAD=908418524491d61e9ffcf407d56160127e513a12
+export CHECKEDC_CLANG_BRANCH=master
+export CHECKEDC_TESTS_BRANCH=master
 
 export EXTRA_TEST_ARGS="${EXTRA_TEST_ARGS} --cflags -fcheckedc-extension"
