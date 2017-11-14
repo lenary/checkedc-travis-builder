@@ -60,7 +60,7 @@ rm ${RESULTS_DIR}/${BM_TIME}/RUNNING
 touch ${RESULTS_DIR}/${BM_TIME}/DONE
 
 echo "Run Completed: ${RESULTS_DIR}/${BM_TIME}"
-echo "Ended At: $(date -Iseconds | tr 'T:+' '---')"
+echo "Ended At: $(date "+%Y-%m-%d-%H-%M-%S-%Z")"
 
 set +ue
 set +o pipefail
