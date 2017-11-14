@@ -15,16 +15,18 @@ function clone_or_update {
     git clone -q --no-single-branch --depth ${CLONE_DEPTH} ${url} ${dir}
   else
     echo "Updating ${dir}"
-    pushd ${dir};
+    pushd -q ${dir}
     git remote rm origin
     git remote add origin ${url}
     git fetch -q --depth ${CLONE_DEPTH} --update-shallow origin
-    popd
+    popd -q
   fi
 
-  pushd ${dir}
+  pushd -q ${dir}
   git checkout -fq ${branch}
-  popd
+  echo -n "Checked Out ${branch}:"
+  git log -1 HEAD
+  popd -q
 }
 
 # Check out LLVM
