@@ -27,7 +27,7 @@ exec \
   --build-threads 1 \
   --compile-multisample ${MULTISAMPLE} \
   --exec-multisample ${MULTISAMPLE} \
-  --succinct-compile-output \
+  --cmake-define=TEST_SUITE_SUPPRESS_WARNINGS=Off \
   --run-under="${TASKSET}" \
   ${EXTRA_ARGS} \
   ${EXTRA_TEST_ARGS} \
